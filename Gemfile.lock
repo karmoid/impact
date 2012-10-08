@@ -62,6 +62,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.1.5)
+    ffi (1.1.5-x86-mingw32)
     gherkin (2.11.2-x86-mingw32)
       json (>= 1.4.6)
     hike (1.2.1)
