@@ -1,0 +1,10 @@
+<%= form_for @category, :url => { :controller => "categories", :action => "create"} do |f| %>
+  <%= f.label :name %>:
+  <%= f.text_field :name %><br />  
+  <%= f.label :hr %>:
+  <%= f.text_field :hr %><br />  
+  <%= f.label :note %>:
+  <%= f.text_area(:note) %>
+  <div class="validation-error"></div>
+  <%= f.submit %>
+<% end %>

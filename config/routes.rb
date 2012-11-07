@@ -1,4 +1,5 @@
 Impact::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -25,7 +26,9 @@ Impact::Application.routes.draw do
   #     end
   #   end
 
-  resources :categories
+  resources :categories do
+	resources :sub_categories
+  end
   
   # Sample resource route with sub-resources:
   #   resources :products do

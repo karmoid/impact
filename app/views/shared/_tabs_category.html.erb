@@ -1,0 +1,38 @@
+<section id="category">
+	<div class="well">
+		<strong><%= category.hr %> : </strong><%= category.note %>
+		<h6>code:[<%= category.name %>]</h6>
+	</div>
+
+<!-- Headings & Paragraph Copy -->
+	<div class="row">
+		<div class="span10">
+			<table class="table table-bordered table-striped">
+				<thead>
+				  <tr>
+					<th>Code</th>
+					<th>Nom</th>
+					<th>Description</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<% category.sub_categories.each do |sc| %>
+						<tr>
+							<td><%= sc.name.blank? ? sc.id : sc.name  %></td>
+							<td><%= sc.hr.blank? ? sc.name : sc.hr  %></td>
+							<td><%= sc.note %></td>
+						</tr>	
+					<% end %>	
+				</tbody>
+			</table>		
+		</div>	
+	</div>
+	<div class="row">
+		<div class="span12">
+		
+		</div>
+	</div>	
+</section>
+<div>
+	<%= link_to "_", new_category_sub_category_path(category), :remote => true, :class => "ui-icon ui-icon-circle-plus my-icon-plusminus" %>
+</div>	

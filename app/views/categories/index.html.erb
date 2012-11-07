@@ -1,1 +1,22 @@
-<%= link_to "New Category", new_category_path %>
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="../">Impact</a>
+			<ul class="nav nav-pills">
+				<% @categories.each do |c| %>
+					<li class="load-sub-category"><%= link_to c.hr, c, :remote => true %></li>
+				<% end %>	
+				<li class="active"><a href="#<%= "tabs-new" %>">Nouvelle catégorie</a></li>
+			</ul>
+		</div>
+	</div>
+</div>	
+<!-- <div id="<%= "tabs-new" %>">
+	<%= render :partial => "shared/tabs_new_category" %>
+</div> -->
+<div id="sub-categories-list"></div>

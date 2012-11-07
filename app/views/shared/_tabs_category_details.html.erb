@@ -1,0 +1,62 @@
+<h1><%= category.name %></h1>
+<p><%= category.note %></p>
+
+<div>
+	<%= link_to "_", new_category_sub_category_path(category), :remote => true, :class => "ui-icon ui-icon-plus my-icon-plusminus" %>
+</div>	
+
+<table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="<%= "table_tabs_#{category.id}"%>" width="100%" aria-describedby="example_info" style="width: 100%; ">	
+	<thead>
+		<tr>
+			<th>sous catégorie</th>
+			<th>déploiement</th>
+			<th>type connexion</th>
+			<th>déploiement lié</th>
+		</tr>
+	</thead>
+<tbody role="alert" aria-live="polite" aria-relevant="all">
+	<% line = 0 %>
+	<% category.sub_categories.each do |sc| %>
+		<% head = sc.hr.blank? ? "#{category.id}-#{sc.id}[#{sc.name}]" : sc.hr %>
+		<% if sc.deployments.size == 0 %>
+			<% line += 1 %>
+			<tr class="gradeA <%= line.even? ? "even" : "odd" %>">
+				<td class=" "><%= head %></td>
+				<td class=" "></td>
+				<td></td>
+				<td></td>
+			</tr>	
+		<% else  %>
+			<% sc.deployments.each do |d| %>
+				<% sub_head = d.hr.blank? ? "2[#{d.name}]" : d.hr %>
+				<% if d.hosts.size == 0 && d.connections.size == 0%>
+					<% line += 1 %>
+					<tr class="gradeA <%= line.even? ? "even" : "odd" %>">
+						<td class=" "><%= head %></td>
+						<td class=" "><%= sub_head %></td>
+						<td></td>
+						<td></td>
+					</tr>	
+				<% end %>
+				<% d.connections.each do |a| %>
+					<% line += 1 %>
+					<tr class="gradeA <%= line.even? ? "even" : "odd" %>">
+						<td class=" "><%= head %></td>
+						<td class=" "><%= sub_head %></td>
+						<td>connecté à</td>
+						<td><%= a.hr.blank? ? "3[#{a.name}]" : a.hr %></td>
+					</tr>	
+				<% end %>	
+				<% d.hosts.each do |a| %>
+					<tr class="gradeA <%= line.even? ? "even" : "odd" %>">
+						<td class=" "><%= head %></td>
+						<td class=" "><%= sub_head %></td>
+						<td>géré par</td>
+						<td><%= a.hr.blank? ? "[#{a.name}]" : a.hr %></td>
+					</tr>	
+				<% end %>	
+			<% end %>
+		<% end %>
+	<% end %>	
+</tbody>
+</table>	
