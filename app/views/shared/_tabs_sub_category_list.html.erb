@@ -1,0 +1,25 @@
+<div id="category-list" class="row">
+	<div class="span6">
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+				<th>Code</th>
+				<th>Nom</th>
+			  </tr>
+			</thead>
+			<tbody id="table-select">
+				<% category.sub_categories.each do |sc| %>
+					<tr data-linknote="ln-<%= "#{sc.id}" %>">
+						<td><%= link_to sc.name.blank? ? sc.id : sc.name, [:edit, category, sc], :remote => true %></td>
+						<td><%= sc.hr.blank? ? sc.name : sc.hr  %></td>
+					</tr>	
+				<% end %>	
+			</tbody>
+		</table>		
+	</div>	
+	<div id="note-list" class="span5 well">
+		<% category.sub_categories.each do |sc| %>
+			<h4><span id="ln-<%= "#{sc.id}" %>"><%= sc.note %></span></h4>
+		<% end %>	
+	</div>
+</div>

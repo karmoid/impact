@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="span12 new_sub_category">
+		<div class="form-horizontal well">
+			<%= form_for [category, sub_category], :remote => true, :action => sub_category.id.blank? ? "create" : "update"  do |f| %>
+				<fieldset>
+					<legend><%= sub_category.id.blank? ? "Nouvelle sous catégorie" : "Modification de la sous catégorie #{sub_category.name}"%></legend>
+					<div class="control-group">
+						<label class="control-label" for="input01">Code</label>
+						<div class="controls">
+							<%= f.text_field :name, :class => "input-xlarge" %></br>
+							<p class="help-block">Ce code mnémonique est plus pratique que le nom complet.</p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="input01">Nom</label>
+						<div class="controls">
+							<%= f.text_field :hr, :class => "input-xlarge" %></br>
+							<p class="help-block">Description courte.</p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="textarea">Description longue</label>
+						<div class="controls">
+							<%= f.text_area :note, :class => "input-xlarge" %>
+						</div>
+					</div>
+					<div class="validation-error"></div>
+					<div class="form-actions">
+						<%= f.submit "Valider", :class => "btn btn-primary", :id => "new_sub_category" %>
+						<%= link_to "Annuler", category, :remote => true, :class => "btn btn-danger" %>
+					</div>
+				</fieldset>
+			<% end %>
+		</div>
+	</div>
+</div>

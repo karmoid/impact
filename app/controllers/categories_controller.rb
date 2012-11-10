@@ -8,6 +8,16 @@ respond_to :html, :xml, :json
 
 	# New action : Creating Category 
 	def new
+		@category = Category.new( params[:category] )
+		respond_with do |format|
+		  format.html do
+			if request.xhr?
+				render :partial => "shared/tabs_new_category", :locals => { :category => @category }, :layout => false, :status => :ok
+			else
+				redirect_to :root
+			end
+		  end
+		end
 	end
 
 	def show
