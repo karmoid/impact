@@ -10,7 +10,20 @@
 			<tbody id="table-select">
 				<% category.sub_categories.each do |sc| %>
 					<tr data-linknote="ln-<%= "#{sc.id}" %>">
-						<td><%= link_to sc.name.blank? ? sc.id : sc.name, [:edit, category, sc], :remote => true %></td>
+						<td>
+							<ul class="nav nav-pills">
+								<li class="dropdown">
+									<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><%= sc.name.blank? ? sc.id : sc.name %><b class="caret"></b></a>
+									<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+										<li><%= link_to "Modifier", [:edit, category, sc], :tabindex => -1, :data => {:target => "#new-sub-category-pane"}, :remote => true %></li>
+										<li><%= link_to "Déploiements", [category, sc, Deployment], :tabindex => -1, :data =>{:target => "#main-category"}, :remote => true %></li>
+										<li class="divider"></li>
+										<li><a tabindex="-1" href="#">Connexions</a></li>
+										<li><a tabindex="-1" href="#">Hôtes</a></li>
+									</ul>
+								</li>					
+							</ul>					
+						</td>
 						<td><%= sc.hr.blank? ? sc.name : sc.hr  %></td>
 					</tr>	
 				<% end %>	
@@ -19,7 +32,11 @@
 	</div>	
 	<div id="note-list" class="span5 well">
 		<% category.sub_categories.each do |sc| %>
-			<h4><span id="ln-<%= "#{sc.id}" %>"><%= sc.note %></span></h4>
+			<span id="ln-<%= "#{sc.id}" %>">
+				<h2><%= "#{sc.hr}" %></h4>
+				<h4><%= sc.note %></h4>
+				<p><%= "(#{sc.name}/#{sc.id})" %></p>
+			</span>	
 		<% end %>	
 	</div>
 </div>

@@ -27,7 +27,9 @@ Impact::Application.routes.draw do
   #   end
 
   resources :categories do
-	resources :sub_categories
+	resources :sub_categories do
+	  resources :deployments
+	end  
   end
   
   # Sample resource route with sub-resources:

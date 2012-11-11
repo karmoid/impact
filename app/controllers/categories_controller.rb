@@ -3,7 +3,6 @@ respond_to :html, :xml, :json
 
 	def index
 		@categories = Category.all
-		@category = Category.new
 	end
 
 	# New action : Creating Category 
@@ -25,7 +24,7 @@ respond_to :html, :xml, :json
 		respond_with do |format|
 			format.html do
 				if request.xhr?
-					render :partial => "shared/tabs_category", :locals => { :category => @category }, :layout => false, :status => :created
+					render :partial => "shared/tabs_category", :locals => { :category => @category }, :layout => false, :status => :ok
 				else
 					redirect_to :root
 				end
