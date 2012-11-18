@@ -1,6 +1,22 @@
 class SubCategoriesController < ApplicationController
 respond_to :html, :xml, :json
 
+	def show
+		@category = Category.find(params[:category_id])
+		@sub_category = @category.sub_categories.find(params[:id])
+		@categories = Category.all
+		respond_with do |format|
+			format.html do
+				if request.xhr?
+					render :partial => "shared/tabs_deployments", :locals => { :category => @category, :sub_category => @sub_category, :categories => @categories }, :layout => false, :status => :ok
+				else
+					redirect_to :root
+				end
+			end
+		end
+	end
+
+
 	def new
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.build

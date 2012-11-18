@@ -1,0 +1,40 @@
+<div id="deployment-list" class="row">
+	<div class="span6">
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+				<th>Code</th>
+				<th>Nom</th>
+			  </tr>
+			</thead>
+			<tbody id="table-select">
+				<% sub_category.deployments.each do |d| %>
+					<tr data-linknote="ln-<%= "#{d.id}" %>">
+						<td>
+							<ul class="nav nav-pills">
+								<li class="dropdown">
+									<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><%= d.name.blank? ? d.id : d.name %><b class="caret"></b></a>
+									<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+										<li><%= link_to "Modifier", [:edit, sub_category.category, sub_category, d], :tabindex => -1, :data => {:target => "#new-edit-pane"}, :remote => true %></li>
+										<li><%= link_to "Connexions", [sub_category.category, sub_category, d], :tabindex => -1, :data =>{:target => "#main-list", :conx => true}, :remote => true %></li>
+										<li><%= link_to "Hôtes", [sub_category.category, sub_category, d], :tabindex => -1, :data =>{:target => "#main-list", :conx => false}, :remote => true %></li>
+									</ul>
+								</li>					
+							</ul>					
+						</td>
+						<td><%= d.hr.blank? ? d.name : d.hr  %></td>
+					</tr>	
+				<% end %>	
+			</tbody>
+		</table>		
+	</div>	
+	<div id="note-list" class="span5 well">
+		<% sub_category.deployments.each do |d| %>
+			<span id="ln-<%= "#{d.id}" %>">
+				<h2><%= "#{d.hr}" %></h4>
+				<h4><%= d.note %></h4>
+				<p><%= "(#{d.name}/#{d.id})" %></p>
+			</span>	
+		<% end %>	
+	</div>
+</div>

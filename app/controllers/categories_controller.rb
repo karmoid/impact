@@ -11,7 +11,7 @@ respond_to :html, :xml, :json
 		respond_with do |format|
 		  format.html do
 			if request.xhr?
-				render :partial => "shared/tabs_new_category", :locals => { :category => @category }, :layout => false, :status => :ok
+				render :partial => "shared/tabs_new_category", :locals => { :category => @category}, :layout => false, :status => :ok
 			else
 				redirect_to :root
 			end
@@ -20,11 +20,12 @@ respond_to :html, :xml, :json
 	end
 
 	def show
+		@categories = Category.all
 		@category = Category.find(params[:id])
 		respond_with do |format|
 			format.html do
 				if request.xhr?
-					render :partial => "shared/tabs_category", :locals => { :category => @category }, :layout => false, :status => :ok
+					render :partial => "shared/tabs_category", :locals => { :category => @category, :categories => @categories }, :layout => false, :status => :ok
 				else
 					redirect_to :root
 				end

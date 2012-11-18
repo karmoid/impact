@@ -8,15 +8,19 @@
 			  </tr>
 			</thead>
 			<tbody id="table-select">
-				<% category.sub_categories.each do |sc| %>
+				<% if conx %>
+					<% sub_categories.deployments.each do |sc| %>
+				<% else %>
+				
+				<% end %>				
 					<tr data-linknote="ln-<%= "#{sc.id}" %>">
 						<td>
 							<ul class="nav nav-pills">
 								<li class="dropdown">
 									<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><%= sc.name.blank? ? sc.id : sc.name %><b class="caret"></b></a>
 									<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-										<li><%= link_to "Modifier", [:edit, category, sc], :tabindex => -1, :data => {:target => "#new-edit-pane"}, :remote => true %></li>
-										<li><%= link_to "Déploiements", [category, sc, Deployment], :tabindex => -1, :data =>{:target => "#main-list"}, :remote => true %></li>
+										<li><%= link_to "Modifier", [:edit, category, sc], :tabindex => -1, :data => {:target => "#new-sub-category-pane"}, :remote => true %></li>
+										<li><%= link_to "Déploiements", [category, sc, Deployment], :tabindex => -1, :data =>{:target => "#main-category"}, :remote => true %></li>
 										<li class="divider"></li>
 										<li><a tabindex="-1" href="#">Connexions</a></li>
 										<li><a tabindex="-1" href="#">Hôtes</a></li>
