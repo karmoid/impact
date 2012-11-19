@@ -31,8 +31,14 @@ $(".load-sub-category").live "ajax:success", (event, data, status, xhr) =>
 	back_to_list(event, data,"main-list")
 			
 $('tr[data-linknote] a').live "ajax:success", (event, data, status, xhr) =>
-	$(event.target.dataset['target']).html(data)
-	show_tab('first')
+	$target = $(event.target.dataset['target'])
+	$target.html(data)
+	console.log("target id = " + $target.attr("id"))
+	if $target.attr("id") == "new-edit-pane" 
+		show_tab('last')
+	else
+		show_tab('first')
+	
 
 
 
