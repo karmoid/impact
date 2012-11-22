@@ -29,14 +29,8 @@
 				<% end %>	
 			</tbody>
 		</table>		
-	</div>	
+	</div>
 	<div id="note-list" class="span5 well">
-		<% category.sub_categories.each do |sc| %>
-			<span id="ln-<%= "#{sc.id}" %>">
-				<h2><%= "#{sc.hr}" %></h4>
-				<h4><%= sc.note %></h4>
-				<p><%= "(#{sc.name}/#{sc.id})" %></p>
-			</span>	
-		<% end %>	
+		<%= render :partial => "shared/detail_sub_categ_show", :collection => category.sub_categories, :as => :sub_category, :locals => {:prefix => "ln"} %>
 	</div>
 </div>

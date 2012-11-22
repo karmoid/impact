@@ -1,0 +1,27 @@
+<span id="<%= prefix %>-<%= "#{sub_category.id}" %>">
+	<h2><%= sub_category.hr %></h4>
+	<h4><%= sub_category.note %></h4>
+	<p><%= "(#{sub_category.name}/#{sub_category.id})" %></p>
+	<% if sub_category.deployments.size > 0 %>
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+				<th>Code</th>
+				<th>Nom</th>
+			  </tr>
+			</thead>
+			<tbody id="table-dep-select">
+				<% sub_category.deployments.each do |d| %>
+					<tr>
+						<td><%= d.name %></td>
+						<td><%= d.hr %></td>
+					</tr>
+				<% end %>	
+			</tbody>
+		</table>	
+	<% else %>
+		<div class="alert alert-info">
+			aucun déploiement
+		</div>		
+	<% end %>
+</span>	
