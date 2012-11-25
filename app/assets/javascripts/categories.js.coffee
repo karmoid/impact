@@ -12,15 +12,24 @@ $(".edit-item").live "ajax:success", (event, data, status, xhr) =>
 
 show_tab = (x) ->
 	$("#mainTab li:#{x} a").tab('show')
+
+$('.auto-hide').live "hover", (ev) ->
+	if ev.type == "mouseenter"
+		console.log("over " + $(this).children('a:first'))
+		$(this).children('a:first').show()
+	if ev.type == "mouseleave"
+		console.log("out " + $(this).children('a:first'))
+		$(this).children('a:first').hide()
 	
-back_to_list = (event, data, target) -> 
+	
+back_to_list = (event, data, target) ->
 	$("##{target}").html(data)
 	$('#note-list span').hide()
-	$('tr[data-linknote]').live "hover", \
+	$('tr[data-linknote]').live "hover", 
 		(e) => 
 			$('#note-list span').hide()
-			$("#"+e.target.parentElement.dataset['linknote']).show()
-
+			$('#'+e.target.parentNode.dataset["linknote"]).show()
+	
 $("#new-form").live "ajax:success", (event, data, status, xhr) =>
 	$("#new-edit-pane").html(data)
 

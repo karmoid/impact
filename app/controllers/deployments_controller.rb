@@ -78,9 +78,9 @@ respond_to :html, :xml, :json
 	end
 
 	def update
-		@category = Category.find(params[:category_id])
-		@sub_category = @category.sub_categories.find(params[:sub_category_id])
-		@deployment = @sub_category.deployments.find(params[:id])
+		# @category = Category.find(params[:category_id])
+		# @sub_category = @category.sub_categories.find(params[:sub_category_id])
+		@deployment = Deployment.find(params[:id])
 		if @deployment.update_attributes(params[:deployment])  
 			respond_with do |format|
 				format.html do

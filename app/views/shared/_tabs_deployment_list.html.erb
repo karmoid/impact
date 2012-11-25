@@ -10,7 +10,7 @@
 			<tbody id="table-select">
 				<% sub_category.deployments.each do |d| %>
 					<tr data-linknote="ln-<%= "#{d.id}" %>">
-						<td><%= d.name.blank? ? d.id : d.name %></td>
+						<td><%= d.name.blank? ? d.id : d.name %><%= flag_helper(d) %></td>
 						<td><%= d.hr.blank? ? d.name : d.hr  %></td>
 					</tr>	
 				<% end %>	

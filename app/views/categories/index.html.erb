@@ -1,5 +1,10 @@
 <% content_for :stack do %>
-  <stack><h3>stack</h3></stack>
+	<% if ! @deployments_stacked.empty? %>
+		<stack><h3>Epinglé</h3></stack>
+		<% @deployments_stacked.each do |ds| %>
+			<span class="label label-info"><%= ds.hr %></span>			
+		<% end %>
+	<% end %>	
 <% end %>
 <div class="navbar">
 	<div class="navbar-inner">
