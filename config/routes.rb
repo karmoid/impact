@@ -1,5 +1,10 @@
 Impact::Application.routes.draw do
 
+	resources :deployments do
+		member do
+			get 'stack'
+		end	
+	end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

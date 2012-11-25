@@ -13,19 +13,30 @@ respond_to :html, :xml, :json
 	end
   end
   
-  def edit
-	@category = Category.find(params[:category_id])
-	@sub_category = @category.sub_categories.find(params[:sub_category_id])
-	@deployment = @sub_category.deployments.find(params[:id])
-	respond_with do |format|
-		format.html do
-			if request.xhr?
-				render :partial => "shared/form_deployment", :locals => {:category => @category, :sub_category => @sub_category, :deployment => @deployment}, :status => :ok
+	def edit
+		@category = Category.find(params[:category_id])
+		@sub_category = @category.sub_categories.find(params[:sub_category_id])
+		@deployment = @sub_category.deployments.find(params[:id])
+		respond_with do |format|
+			format.html do
+				if request.xhr?
+					render :partial => "shared/form_deployment", :locals => {:category => @category, :sub_category => @sub_category, :deployment => @deployment}, :status => :ok
+				end
 			end
 		end
 	end
-  end
 
+	def stack
+		@deployment = Deployment.find(params[:id])
+		respond_with do |format|
+			format.html do
+				if request.xhr?
+					render :partial => "shared/stack_deployment", :locals => {:deployment => @deployment}, :status => :ok
+				end
+			end
+		end
+	end
+	
 	def new
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.find(params[:sub_category_id])

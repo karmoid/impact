@@ -1,7 +1,29 @@
 <span id="<%= prefix %>-<%= "#{sub_category.id}" %>">
-	<h2><%= sub_category.hr %></h4>
-	<h4><%= sub_category.note %></h4>
-	<p><%= "(#{sub_category.name}/#{sub_category.id})" %></p>
+	<div class="row">
+		<div class="span3">
+			<h2><%= sub_category.hr %></h4>
+		</div>
+		<div class="span2 menu-item">
+			<ul class="nav nav-pills">
+				<li class="dropdown">
+					<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">Options <b class="caret"></b></a>
+					<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4"  data-linknote="ln-<%= "#{sub_category.id}" %>">
+						<li><%= link_to "Modifier", [:edit, sub_category.category, sub_category], :tabindex => -1, :data => {:target => "#new-edit-pane"}, :remote => true %></li>
+						<li><%= link_to "Déploiements", [sub_category.category, sub_category, Deployment], :tabindex => -1, :data =>{:target => "#main-list"}, :remote => true %></li>
+						<li class="divider"></li>
+						<li><a tabindex="-1" href="#">Connexions</a></li>
+						<li><a tabindex="-1" href="#">Hôtes</a></li>
+					</ul>
+				</li>
+			</ul>	
+		</div>	
+	</div>	
+	<div class="row">
+		<div class="span6">
+			<h4><%= sub_category.note %></h4>
+			<p><%= "(#{sub_category.name}/#{sub_category.id})" %></p>
+		</div>
+	</div>	
 	<% if sub_category.deployments.size > 0 %>
 		<table class="table table-striped table-condensed table-hover">
 			<thead>

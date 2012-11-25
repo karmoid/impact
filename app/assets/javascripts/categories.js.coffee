@@ -30,15 +30,18 @@ $(".new-category").live "ajax:success", (event, data, status, xhr) =>
 $(".load-sub-category").live "ajax:success", (event, data, status, xhr) =>
 	back_to_list(event, data,"main-list")
 			
-$('tr[data-linknote] a').live "ajax:success", (event, data, status, xhr) =>
+$('.menu-item ul[data-linknote] a').live "ajax:success", (event, data, status, xhr) =>
 	$target = $(event.target.dataset['target'])
 	$target.html(data)
 	console.log("target id = " + $target.attr("id"))
 	if $target.attr("id") == "new-edit-pane" 
 		show_tab('last')
 	else
+		back_to_list(event, data,"main-list")
 		show_tab('first')
 	
+$('a.stack-dep').live "ajax:success", (event, data, status, xhr) =>
+	$("stack").append(data)
 
 
 

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe DeploymentsController do
 
-  describe "GET 'index'" do
+  describe "GET 'stack'" do
     it "returns http success" do
-      get 'index'
+      get 'stack'
       response.should be_success
     end
   end

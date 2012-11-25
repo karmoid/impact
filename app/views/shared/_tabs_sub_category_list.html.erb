@@ -1,5 +1,5 @@
 <div id="item-list" class="row">
-	<div class="span6">
+	<div class="span5">
 		<table class="table table-striped table-condensed table-hover">
 			<thead>
 			  <tr>
@@ -10,27 +10,14 @@
 			<tbody id="table-select">
 				<% category.sub_categories.each do |sc| %>
 					<tr data-linknote="ln-<%= "#{sc.id}" %>">
-						<td>
-							<ul class="nav nav-pills">
-								<li class="dropdown">
-									<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><%= sc.name.blank? ? sc.id : sc.name %><b class="caret"></b></a>
-									<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-										<li><%= link_to "Modifier", [:edit, category, sc], :tabindex => -1, :data => {:target => "#new-edit-pane"}, :remote => true %></li>
-										<li><%= link_to "Déploiements", [category, sc, Deployment], :tabindex => -1, :data =>{:target => "#main-list"}, :remote => true %></li>
-										<li class="divider"></li>
-										<li><a tabindex="-1" href="#">Connexions</a></li>
-										<li><a tabindex="-1" href="#">Hôtes</a></li>
-									</ul>
-								</li>					
-							</ul>					
-						</td>
+						<td><%= sc.name.blank? ? sc.id : sc.name %></td>
 						<td><%= sc.hr.blank? ? sc.name : sc.hr  %></td>
 					</tr>	
 				<% end %>	
 			</tbody>
 		</table>		
 	</div>
-	<div id="note-list" class="span5 well">
+	<div id="note-list" class="span6 well">
 		<%= render :partial => "shared/detail_sub_categ_show", :collection => category.sub_categories, :as => :sub_category, :locals => {:prefix => "ln"} %>
 	</div>
 </div>
