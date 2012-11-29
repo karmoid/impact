@@ -15,11 +15,9 @@ show_tab = (x) ->
 
 $('.auto-hide').live "hover", (ev) ->
 	if ev.type == "mouseenter"
-		console.log("over " + $(this).children('a:first'))
-		$(this).children('a:first').show()
+		$(this).children('a:first').children('.icon-flag').parent().show()
 	if ev.type == "mouseleave"
-		console.log("out " + $(this).children('a:first'))
-		$(this).children('a:first').hide()
+		$(this).children('a:first').children('.icon-flag').parent().hide()
 	
 	
 back_to_list = (event, data, target) ->
@@ -49,9 +47,13 @@ $('.menu-item ul[data-linknote] a').live "ajax:success", (event, data, status, x
 		back_to_list(event, data,"main-list")
 		show_tab('first')
 	
-$('a.stack-dep').live "ajax:success", (event, data, status, xhr) =>
-	$("stack").append(data)
-
-
-
-	
+$('td.auto-hide > a').live "ajax:success", (event, data, status, xhr) =>
+	$("#main-menu div:first").html(data)
+	$tag = $(event.target)
+	if $tag.children('i').hasClass("icon-flag")
+		$tag.children('i').removeClass("icon-flag").addClass("icon-tag")
+		$tag.attr("href",$tag.attr("href").replace(true,false))
+	else
+		$tag.children('i').removeClass("icon-tag").addClass("icon-flag")
+		$tag.attr("href",$tag.attr("href").replace(false,true))
+	console.log($tag.attr("href"))

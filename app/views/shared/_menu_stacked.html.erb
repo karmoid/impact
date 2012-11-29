@@ -1,0 +1,27 @@
+<div> 
+	<ul class="nav pull-right">
+		<li><a href="#">Link</a></li>
+		<li class="divider-vertical"></li>
+		<% if ! stack.empty? %>
+			<% head_category = -1 %>
+			<% stack.each do |ds| %>
+				<% if ds.sub_category.category.id != head_category %>
+					<% if head_category != -1 %>
+						</ul></li>
+					<% end %>
+					<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= ds.sub_category.category.hr %> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+					<% head_category = ds.sub_category.category.id %>	
+				<% end %>
+				<li><a href="#"><%= ds.hr %></a></li>
+			<% end %>
+			</ul>
+		<% else %>	
+			<li class="disable">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Aucune épingle <b class="caret"></b></a>
+			</li>
+		<% end %>	
+		</li>
+	</ul>
+</div>

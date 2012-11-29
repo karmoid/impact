@@ -85,7 +85,8 @@ respond_to :html, :xml, :json
 			respond_with do |format|
 				format.html do
 					if request.xhr?
-						render :partial => "shared/tabs_deployment_list" , :locals => {:category => @category, :sub_category => @sub_category}, :status => :created
+						@deployments_stacked = Deployment.joins(:sub_category => :category).where(:stacked => true).order("categories.name")
+						render :partial => "shared/menu_stacked" , :locals => {:stack => @deployments_stacked}, :status => :created
 					else
 						redirect_to :root
 					end

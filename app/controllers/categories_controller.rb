@@ -3,7 +3,7 @@ respond_to :html, :xml, :json
 
 	def index
 		@categories = Category.all
-		@deployments_stacked = Deployment.where(:stacked => true)
+		@deployments_stacked = Deployment.joins(:sub_category => :category).where(:stacked => true).order("categories.name")
 	end
 
 	# New action : Creating Category 

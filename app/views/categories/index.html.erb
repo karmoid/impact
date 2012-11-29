@@ -1,11 +1,3 @@
-<% content_for :stack do %>
-	<% if ! @deployments_stacked.empty? %>
-		<stack><h3>Epinglé</h3></stack>
-		<% @deployments_stacked.each do |ds| %>
-			<span class="label label-info"><%= ds.hr %></span>			
-		<% end %>
-	<% end %>	
-<% end %>
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
@@ -15,7 +7,7 @@
 				<span class="icon-bar"></span>
 			</a>
 			<a class="brand" href="../">Impact</a>
-			<div class="nav-collapse">
+			<div id="main-menu" class="nav-collapse">
 				<ul class="nav">
 					<li class="active"><a href="#">Home</a></li>
 					<li class="dropdown">
@@ -29,20 +21,7 @@
 						</ul>
 					</li>
 				</ul>
-				<ul class="nav pull-right">
-					<li><a href="#">Link</a></li>
-					<li class="divider-vertical"></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-						</ul>
-					</li>
-				</ul>
+				<%= render :partial => "shared/menu_stacked", :locals => { :stack => @deployments_stacked } %>
 			</div>			
 		</div>
 	</div>
