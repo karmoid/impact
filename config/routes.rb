@@ -5,6 +5,9 @@ Impact::Application.routes.draw do
 			get 'stack'
 		end	
 	end
+	
+	match 'hosts/:id' => 'deployments#hosts', :as => :hosts
+	match 'conx/:id' => 'deployments#conx', :as => :conx
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

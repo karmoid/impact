@@ -37,6 +37,15 @@ respond_to :html, :xml, :json
 		end
 	end
 	
+	def hosts
+		list_linked(true)
+	end
+
+	def conx
+		list_linked(false)
+	end
+
+	
 	def new
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.find(params[:sub_category_id])
@@ -104,5 +113,15 @@ respond_to :html, :xml, :json
 			end
 		end
 	end
-  
+private
+	def list_linked(hosts)
+		@deployment = Deployment.find(params[:id])
+		respond_with do |format|
+			format.html do
+				if request.xhr?
+					render :partial => "shared/list_deployments", :locals => {:deployment => @deployment, :hosts => hosts}, :status => :ok
+				end
+			end
+		end
+	end
 end

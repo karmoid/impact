@@ -1,0 +1,16 @@
+<div class="host-list">
+	<div class="span6">
+		<% if hosts %>
+			<% deps = deployment.hosts %>
+			<h4>Gestionnaires</h4>
+		<% else %>
+			<% deps = deployment.connections %>
+			<h4>Connections</h4>
+		<% end %>
+		<ul>
+			<% deps.each do |cnx| %>
+				<li><%= cnx.hr %><%= flag_helper(cnx) %></li>
+			<% end %>	
+		</ul>
+    </div>	
+</div>

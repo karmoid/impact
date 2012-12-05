@@ -17,7 +17,26 @@
 			</tbody>
 		</table>		
 	</div>	
-	<div id="note-list" class="span6">
-		<%= render :partial => "shared/detail_deployment_show", :collection => sub_category.deployments, :as => :deployment, :locals => {:prefix => "ln"} %>
-	</div>
+	<div class="span6">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#tab-detail" data-toggle="tab">Section 1</a></li>
+			<li class=""><%= link_to "Géré par", hosts_path(-1), :target => "tab-host", :toggle => "tab", :remote => true %></li>
+			<li class=""><%= link_to "Connecté à", conx_path(-1), :target => "tab-conx", :toggle => "tab", :remote => true %></li>
+		</ul>
+		<div class="tabbable">
+			<div class="tab-content">
+			  <div class="tab-pane active" id="tab-detail">
+				<div id="note-list" class="span5">
+					<%= render :partial => "shared/detail_deployment_show", :collection => sub_category.deployments, :as => :deployment, :locals => {:prefix => "ln"} %>
+				</div>
+			  </div>
+			  <div class="tab-pane" id="tab-host">
+				<div class="host-list"></div>
+			  </div>
+			  <div class="tab-pane" id="tab-conx">
+				<div class="conx-list"></div>
+			  </div>
+			</div>
+		</div>	
+	</div>	
 </div>

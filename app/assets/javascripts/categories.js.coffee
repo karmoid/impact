@@ -26,7 +26,18 @@ back_to_list = (event, data, target) ->
 	$('tr[data-linknote]').live "hover", 
 		(e) => 
 			$('#note-list span').hide()
-			$('#'+e.target.parentNode.dataset["linknote"]).show()
+			$linknote = e.target.parentNode.dataset["linknote"]
+			$('#'+$linknote).show()
+			$('#item-list .nav-tabs a:eq(1)').attr("href", "/hosts/"+$linknote.split("-")[1])
+			$('#item-list .nav-tabs a:last').attr("href", "/conx/"+$linknote.split("-")[1])
+			
+$('#item-list .nav-tabs a').live "ajax:success", (event, data, status, xhr) =>
+	$tag = $(event.target).attr("target")
+	console.log($tag)
+	$('#'+$tag+' > div').html(data)
+	$('#item-list .tab-pane').hide()
+	$('#'+$tag).show()
+	$(event.target).tabs({ active: 1 })
 	
 $("#new-form").live "ajax:success", (event, data, status, xhr) =>
 	$("#new-edit-pane").html(data)
