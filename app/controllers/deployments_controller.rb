@@ -44,7 +44,14 @@ respond_to :html, :xml, :json
 	def conx
 		list_linked(false)
 	end
+	
+	def addhost
+		add_deployment(true)
+	end
 
+	def addconx
+		add_deployment(false)
+	end
 	
 	def new
 		@category = Category.find(params[:category_id])
@@ -116,6 +123,7 @@ respond_to :html, :xml, :json
 private
 	def list_linked(hosts)
 		@deployment = Deployment.find(params[:id])
+		@deployments_stacked = Deployment.joins(:sub_category => :category).where(:stacked => true).order("categories.name")
 		respond_with do |format|
 			format.html do
 				if request.xhr?
@@ -123,5 +131,15 @@ private
 				end
 			end
 		end
+	end
+	def add_deployment(hosts)
+		@deployment = Deployment.find(params[:id])
+		@deploymentlink = Deployment.find(params[:deployment_id])
+		if hosts
+			@deployment.connexions << @deploymentlink
+		else
+			@deployment.hosts << @deploymentlink
+		end
+		
 	end
 end

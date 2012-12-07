@@ -8,6 +8,8 @@ Impact::Application.routes.draw do
 	
 	match 'hosts/:id' => 'deployments#hosts', :as => :hosts
 	match 'conx/:id' => 'deployments#conx', :as => :conx
+	match 'addhost/:id/:deployment_id' => 'deployments#addhost', :as => :deployments_host
+	match 'addconx/:id/:deployment_id' => 'deployments#addconx', :as => :deployments_conx
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

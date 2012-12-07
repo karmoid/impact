@@ -17,11 +17,11 @@
 			</tbody>
 		</table>		
 	</div>	
-	<div class="span6">
+	<div class="span7">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab-detail" data-toggle="tab">Section 1</a></li>
-			<li class=""><%= link_to "Géré par", hosts_path(-1), :target => "tab-host", :toggle => "tab", :remote => true %></li>
-			<li class=""><%= link_to "Connecté à", conx_path(-1), :target => "tab-conx", :toggle => "tab", :remote => true %></li>
+			<li class=""><%= link_to "Géré par", hosts_path(-1), :remote => true, :data => {:toggle => "tab", :target => "#tab-host"} %></li>
+			<li class=""><%= link_to "Connecté à", conx_path(-1), :remote => true, :data => {:toggle => "tab", :target => "#tab-conx"} %></li>
 		</ul>
 		<div class="tabbable">
 			<div class="tab-content">

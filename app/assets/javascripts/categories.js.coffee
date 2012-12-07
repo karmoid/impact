@@ -32,12 +32,8 @@ back_to_list = (event, data, target) ->
 			$('#item-list .nav-tabs a:last').attr("href", "/conx/"+$linknote.split("-")[1])
 			
 $('#item-list .nav-tabs a').live "ajax:success", (event, data, status, xhr) =>
-	$tag = $(event.target).attr("target")
-	console.log($tag)
-	$('#'+$tag+' > div').html(data)
-	$('#item-list .tab-pane').hide()
-	$('#'+$tag).show()
-	$(event.target).tabs({ active: 1 })
+	$tag = $(event.target).attr("data-target")
+	$($tag+' div').html(data)
 	
 $("#new-form").live "ajax:success", (event, data, status, xhr) =>
 	$("#new-edit-pane").html(data)

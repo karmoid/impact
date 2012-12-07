@@ -12,5 +12,6 @@
 				<li><%= cnx.hr %><%= flag_helper(cnx) %></li>
 			<% end %>	
 		</ul>
+		<%= render :partial => "shared/list_stacked", :locals => { :stack => @deployments_stacked, :align => "pull-left", :id => deployment, :hosts => hosts } %>
     </div>	
 </div>

@@ -1,0 +1,18 @@
+<div> 
+	<% if ! stack.empty? %>
+		<div class="well" style="padding: 8px 0;">
+			<ul class="nav nav-list">
+			<% head_category = -1 %>
+			<% stack.each do |ds| %>
+				<% if ds.sub_category.category.id != head_category %>
+					<li class="nav-header"><%= ds.sub_category.category.hr %></li>
+					<% head_category = ds.sub_category.category.id %>
+				<% end %>	
+				<li><span><%= link_to raw("<i class='icon-plus'></i>"), hosts ? deployments_host_path(id,ds.id) : deployments_conx_path(id,ds.id), :remote => true, :class => "ui-icon-plus" %><%= ds.hr %></span></li>
+			<% end %>	
+				<li class="divider"></li>
+				<li><a href="#">Ajout</a></li>
+			</ul>
+		</div>		
+	<% end %>	
+</div>
