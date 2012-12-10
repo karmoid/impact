@@ -1,26 +1,10 @@
 <span id="<%= prefix %>-<%= "#{deployment.id}" %>">
 	<div class="span6">
-		<h4>Géré par</h4>
-		<ul>
-			<% deployment.hosts.each do |cnx| %>
-				<li><%= cnx.hr %><%= flag_helper(cnx) %></li>
-			<% end %>	
-		</ul>	
-	</div>	
-	<div class="span6">
-		<div class="span3">
-			<%= link_to deployment.hr, stack_deployment_path(deployment), :class => "label label-info stack-dep", :remote => true %><%= flag_helper(deployment) %>
-		</div>
-		<div class="span2 menu-item">
+		<div class="menu-item">
 			<ul class="nav nav-pills">
-				<li class="dropdown">
-					<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">Options <b class="caret"></b></a>
-					<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4" data-linknote="ln-<%= "#{deployment.id}" %>">
-						<li><%= link_to "Modifier", [:edit, deployment.sub_category.category, deployment.sub_category, deployment], :tabindex => -1, :data => {:target => "#new-edit-pane"}, :remote => true %></li>
-						<li><%= link_to "Connexions", [deployment.sub_category.category, deployment.sub_category, deployment], :tabindex => -1, :data =>{:target => "#main-list", :conx => true}, :remote => true %></li>
-						<li><%= link_to "Hôtes", [deployment.sub_category.category, deployment.sub_category, deployment], :tabindex => -1, :data =>{:target => "#main-list", :conx => false}, :remote => true %></li>
-					</ul>
-				</li>
+				<li><%= link_to "Modifier", [:edit, deployment.sub_category.category, deployment.sub_category, deployment], :tabindex => -1, :data => {:target => "#new-edit-pane"}, :remote => true %></li>
+				<li><%= link_to "Connexions", [deployment.sub_category.category, deployment.sub_category, deployment], :tabindex => -1, :data =>{:target => "#main-list", :conx => true}, :remote => true %></li>
+				<li><%= link_to "Hôtes", [deployment.sub_category.category, deployment.sub_category, deployment], :tabindex => -1, :data =>{:target => "#main-list", :conx => false}, :remote => true %></li>
 			</ul>	
 		</div>	
 	</div>	
@@ -28,12 +12,4 @@
 		<h4><%= deployment.note %></h4>
 		<p><%= "(#{deployment.name}/#{deployment.id})" %></p>
 	</div>	
-	<div class="span6">
-		<h4>Connexion</h4>
-		<ul>
-			<% deployment.connections.each do |cnx| %>
-				<li><%= cnx.hr %><%= flag_helper(cnx) %></li>
-			<% end %>	
-		</ul>
-    </div>	
 </span>	

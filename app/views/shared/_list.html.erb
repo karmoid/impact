@@ -1,0 +1,15 @@
+<div class="span6">
+	<h4>Déploiements contenant <%= @search %></h4>
+	<ul class="nav nav-list">
+	<% head_sc = -1 %>
+	<% deployments.each do |ds| %>
+		<% if ds.sub_category.id != head_sc %>
+			<li class="nav-header"><%= ds.sub_category.category.hr %>-<%= ds.sub_category.hr %></li>
+			<% head_sc = ds.sub_category.id %>
+		<% end %>	
+		<li><%= ds.hr %></li>
+	<% end %>	
+	</ul>
+</div>	
+
+

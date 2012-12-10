@@ -36,6 +36,24 @@ respond_to :html, :xml, :json
 			end
 		end
 	end
+
+	def list
+		@search ||= params[:search].upcase()
+		@deployments = Deployment.joins(:sub_category => :category).where(
+		"upper(deployments.name) similar to :parm or upper(deployments.hr) similar to :parm or upper(sub_categories.name) similar to :parm or upper(sub_categories.hr) similar to :parm ", :parm => @search).order("categories.name, sub_categories.name")
+		@deployments.each do |d|
+			logger.info "hr:#{d.hr} name:#{d.name} sc.hr:#{d.sub_category.hr} sc.name:#{d.sub_category.name}"
+		end 
+		respond_with do |format|
+			format.html do
+				if request.xhr?
+					render :partial => "shared/list", :locals => {:deployments => @deployments}, :status => :ok
+				end
+			end
+		end	
+	end
+
+
 	
 	def hosts
 		list_linked(true)
@@ -102,7 +120,7 @@ respond_to :html, :xml, :json
 				format.html do
 					if request.xhr?
 						@deployments_stacked = Deployment.joins(:sub_category => :category).where(:stacked => true).order("categories.name")
-						render :partial => "shared/menu_stacked" , :locals => {:stack => @deployments_stacked}, :status => :created
+						render :partial => "shared/menu_stacked" , :locals => {:stack => @deployments_stacked, :align => "pull-right" }, :status => :created
 					else
 						redirect_to :root
 					end
@@ -136,9 +154,9 @@ private
 		@deployment = Deployment.find(params[:id])
 		@deploymentlink = Deployment.find(params[:deployment_id])
 		if hosts
-			@deployment.connexions << @deploymentlink
-		else
 			@deployment.hosts << @deploymentlink
+		else
+			@deployment.connections << @deploymentlink
 		end
 		
 	end
