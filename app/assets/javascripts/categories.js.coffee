@@ -39,7 +39,8 @@ $("#new-form").live "ajax:success", (event, data, status, xhr) =>
 	$("#new-edit-pane").html(data)
 
 $("#search-results").live "ajax:success", (event, data, status, xhr) =>
-	$('#search-results div').html(data)
+	$("#results").html(data)
+
 	
 $(".new-category").live "ajax:success", (event, data, status, xhr) =>
 	$("#main-list").html(data)

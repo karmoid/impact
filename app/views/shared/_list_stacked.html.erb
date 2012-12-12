@@ -1,4 +1,5 @@
-<div> 
+<div class="row">
+	<div class="span6"> 
 	<% if ! stack.empty? %>
 		<div class="well" style="padding: 8px 0;">
 			<ul class="nav nav-list">
@@ -15,4 +16,21 @@
 			</ul>
 		</div>		
 	<% end %>	
-</div>
+	</div>
+	<div class="span6"> 
+		<% if ! stack.empty? %>
+			<% stack.each do |ds| %>
+				<div class="btn-group open">
+					<a class="btn btn-primary" href="#"><%= ds.hr %></a>
+					<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Gestionnaire</a></li>
+						<li><a href="#">Connecté à</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Y aller</a></li>
+					</ul>
+				</div>			
+			<% end %>	
+		<% end %>	
+	</div>
+</div>	
