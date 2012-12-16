@@ -1,10 +1,10 @@
 <header class="jumbotron subhead" id="overview">
-  <%= render :partial => "shared/menu_categories" , :locals => {:categories => categories} %>
   <div class="row">
     <div class="span6">
       <h1><%= category.hr %></h1>
-      <h2><%= sub_category.hr %></h1>
-      <p class="lead"><%= sub_category.note %></p>
+      <h2><%= sub_category.hr %></h2>
+      <h3><%= deployment.hr %></h3>
+      <p class="lead"><%= deployment.note %></p>
     </div>
   </div>
 </header>
@@ -18,11 +18,11 @@
 				  <span class="icon-bar"></span>
 				</a>
 				<span class="load-sub-category">
-					<%= link_to raw('<b class="icon-chevron-left"></b> '+h(sub_category.hr)), sub_category.category, :remote => true, :class => "brand" %></li>
+					<%= link_to raw('<b class="icon-chevron-left"></b> '+h(deployment.hr)), [category, sub_category, Deployment], :remote => true, :class => "brand" %></li>
 				</span>	
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><%= link_to "Nouveau", new_category_sub_category_deployment_path(category,sub_category), :id => "new-form", :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
+						<li><%= link_to "Modifier", edit_category_sub_category_deployment_path(category,sub_category,deployment), :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
 						<li class="active"><%= link_to "Liste", [sub_category.category, sub_category, Deployment], :tabindex => 0, :class => "fill-target", :data =>{:toggle => "tab", :target => "#main-list"}, :remote => true %></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sous catégories <b class="caret"></b></a>
@@ -36,7 +36,7 @@
 						</li>
 					</ul>
 					<div id="search-results">
-						<%= form_tag listall_path(), :class => "navbar-search pull-left", :remote=>true do %>
+						<%= form_tag list_path(deployment.id), :class => "navbar-search pull-left", :remote=>true do %>
 							<%= text_field_tag(:search, @search, :class => "search-query span2", :placeholder => "déploiements") %>
 						<% end %>	
 					</div>
@@ -47,6 +47,6 @@
 	<div class="span12" id="results">
 	</div>
 	<div id="myTabContent">
-		<%= render :partial => "shared/tabs_deployment_list" , :locals => {:sub_category => sub_category} %>
+		<%= render :partial => "shared/tabs_connections_list" , :locals => {:deployment => deployment} %>
 	</div>	
 </section>

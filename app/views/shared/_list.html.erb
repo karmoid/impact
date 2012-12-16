@@ -1,15 +1,22 @@
-<div class="span6">
-	<h4>Déploiements contenant <%= @search %></h4>
-	<ul class="nav nav-list">
-	<% head_sc = -1 %>
-	<% deployments.each do |ds| %>
-		<% if ds.sub_category.id != head_sc %>
-			<li class="nav-header"><%= ds.sub_category.category.hr %>-<%= ds.sub_category.hr %></li>
-			<% head_sc = ds.sub_category.id %>
+<div class="span10 offset1">
+    <form class="form-search">
+		<span class="badge badge-info"><%= deployments.size %> résultat<%= "s" unless deployments.size == 0 %> pour : <%= @search %></span>
+		<% head_sc = -1 %>
+		<% deployments.each do |ds| %>
+			<% if ds.sub_category.id != head_sc %>
+				<li class="nav-header"><%= ds.sub_category.category.hr %>-<%= ds.sub_category.hr %></li>
+				<% head_sc = ds.sub_category.id %>
+			<% end %>	
+			<li>
+				<% if link %>
+					<%= link_to raw('<i class="icon-indent-right"></i>'), addconx_path(:id => ds.id, :deployment_id => deployment.id, :inverse_val => "true"), :remote => true, :class => "fill-target", :data => {:target => "#item-list"} %>
+					<%= link_to raw('<i class="icon-indent-left"></i>'), addconx_path(:id => deployment.id,  :deployment_id => ds.id, :inverse_val => "false"), :remote => true, :class => "fill-target", :data => {:target => "#item-list"} %>
+				<% end %>
+				<%= link_to h(ds.name.blank? ? ds.id : ds.name), [ds.sub_category.category, ds.sub_category, ds], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %><%= flag_helper(ds) %>
+			</li>
 		<% end %>	
-		<li><%= ds.hr %></li>
-	<% end %>	
 	</ul>
-</div>	
+    </form>
+</div>
 
 

@@ -1,0 +1,41 @@
+<div id="item-list" class="row">
+	<div class="span12">
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+				<th><th>
+				<th>Ancêtre</th>
+				<th></th>
+				<th>Connexions</th>
+				<th></th>
+			  </tr>
+			</thead>
+			<tbody id="table-select">
+				<% deployment.connections.each do |c| %>
+					<tr>
+						<td>
+							<%= link_to raw('<i class="icon-random"></i>'), swapconx_path(:id => deployment.id, :deployment_id => c.id, :inverse_val => "false"), :remote => true, :class => "fill-target", :data => {:target => "#item-list"} %>
+							<%= link_to raw('<i class="icon-resize-full"></i>'), delconx_path(:id => deployment.id, :deployment_id => c.id, :inverse_val => "false"), :remote => true, :class => "fill-target", :data => {:target => "#item-list"} %>
+						</td>
+						<td></td>
+						<td></td>
+						<td><%= link_to h(c.name.blank? ? c.id : c.name), [c.sub_category.category, c.sub_category, c], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %><%= flag_helper(c) %></td>
+						<td><%= c.hr.blank? ? c.name : c.hr  %></td>
+					</tr>	
+				<% end %>	
+				<% deployment.hosts.each do |c| %>
+					<tr>
+						<td>
+							<%= link_to raw('<i class="icon-random"></i>'), swapconx_path(:id => c.id, :deployment_id => deployment.id, :inverse_val => "true"), :remote => true, :class => "fill-target", :data => {:target => "#item-list"} %>
+							<%= link_to raw('<i class="icon-resize-full"></i>'), delconx_path(:id => c.id, :deployment_id => deployment.id, :inverse_val => "true"), :remote => true, :class => "fill-target", :data => {:target => "#item-list"} %>
+						</td>
+						<td><%= link_to h(c.name.blank? ? c.id : c.name), [c.sub_category.category, c.sub_category, c], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %><%= flag_helper(c) %></td>
+						<td><%= c.hr.blank? ? c.name : c.hr  %></td>
+						<td></td>
+						<td></td>
+					</tr>	
+				<% end %>	
+			</tbody>
+		</table>		
+	</div>	
+</div>

@@ -8,9 +8,11 @@ Impact::Application.routes.draw do
 	
 	match 'hosts/:id' => 'deployments#hosts', :as => :hosts
 	match 'conx/:id' => 'deployments#conx', :as => :conx
-	match 'list' => 'deployments#list', :as => :list
-	match 'addhost/:id/:deployment_id' => 'deployments#addhost', :as => :deployments_host
-	match 'addconx/:id/:deployment_id' => 'deployments#addconx', :as => :deployments_conx
+	match 'listall' => 'deployments#list', :as => :listall
+	match 'list/:id' => 'deployments#list', :as => :list
+	match 'addconx/:id/:deployment_id/:inverse_val' => 'deployments#addconx', :as => :addconx
+	match 'delconx/:id/:deployment_id/:inverse_val' => 'deployments#delconx', :as => :delconx
+	match 'swapconx/:id/:deployment_id/:inverse_val' => 'deployments#swapconx', :as => :swapconx
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.

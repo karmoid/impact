@@ -13,7 +13,7 @@
 						<ul class="dropdown-menu">
 					<% head_category = ds.sub_category.category.id %>	
 				<% end %>
-				<li><a href="#"><%= ds.hr %></a></li>
+				<li><%= link_to h(ds.name.blank? ? ds.id : ds.name), [ds.sub_category.category, ds.sub_category, ds], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %></li>
 			<% end %>
 			</ul>
 		<% else %>	
