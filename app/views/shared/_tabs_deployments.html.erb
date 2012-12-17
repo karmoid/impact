@@ -22,6 +22,7 @@
 				</span>	
 				<div class="nav-collapse">
 					<ul class="nav">
+						<li><%= link_to "Modifier", edit_category_sub_category_path(category,sub_category), :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
 						<li><%= link_to "Nouveau", new_category_sub_category_deployment_path(category,sub_category), :id => "new-form", :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
 						<li class="active"><%= link_to "Liste", [sub_category.category, sub_category, Deployment], :tabindex => 0, :class => "fill-target", :data =>{:toggle => "tab", :target => "#main-list"}, :remote => true %></li>
 						<li class="dropdown">

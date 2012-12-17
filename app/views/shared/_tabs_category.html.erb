@@ -24,7 +24,8 @@
 				<a class="brand" href="#"><%= category.hr %></a>				
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><%= link_to "Saisie", new_category_sub_category_path(category), :id => "new-form", :remote => true, :data => {:toggle => "tab", :target => "#edit"} %></li>
+						<li class="active"><%= link_to "Modifier", edit_category_path(category), :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
+						<li class="active"><%= link_to "Nouveau", new_category_sub_category_path(category), :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
 						<li><a href="#">Link</a></li>
 						<li class="dropdown menu-item">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Catégories <b class="caret"></b></a>
@@ -62,55 +63,7 @@
 	</div>	
 	<div class="span12" id="results">
 	</div>
-</section>
-<section id="sub_categories">
-	<div class="page-header">
-		<h1>Sous catégories</h1>
-	</div>
-
-	<!-- Headings & Paragraph Copy -->
-	<ul id="mainTab" class="nav nav-tabs">
-		<li class="active"><a href="#home" data-toggle="tab">Sous catégories</a></li>
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Liens <b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				<li><a href="#dropdown1" data-toggle="tab">@link</a></li>
-				<li><a href="#dropdown2" data-toggle="tab">@site</a></li>
-			</ul>
-		</li>
-		<li><%= link_to "Saisie", new_category_sub_category_path(category), :id => "new-form", :remote => true, :data => {:toggle => "tab", :target => "#edit"} %></li>
-	</ul>	
-</section>
-<div id="myTabContent" class="tab-content">
-	<div class="tab-pane fade active in" id="home">
-		<!-- Headings & Paragraph Copy -->
+	<div id="myTabContent">
 		<%= render :partial => "shared/tabs_sub_category_list" , :locals => {:category => category} %>
 	</div>
-	<div class="tab-pane fade" id="edit">
-		<div id="new-edit-pane"></div>
-	</div>
-	<div class="tab-pane fade" id="dropdown1">
-		<div id="preview" class="span6">
-			<label>Textbox with search icon</label>
-			<div class="input-append"><input type="text" id="" name=""><span class="add-on"><i class="icon-search"></i></span></div>
-
-			<label>Textbox with calendar icon</label>
-			<div class="input-append"><input type="text" id="" name=""><span class="add-on"><i class="icon-calendar"></i></span></div>
-
-			<label>Textbox for email</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="" name=""></div>
-
-			<label>Textbox for user name</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span><input type="text" id="" name=""></div>
-
-			<label>Textbox for website</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-globe"></i></span><input type="text" id="" name=""></div>
-
-			<label>Textbox for uploading an image</label>
-			<div class="input-prepend input-append"><span class="add-on"><i class="icon-picture"></i></span><input type="text" id="" name=""><button class="btn" type="button">Upload</button>
-		</div>
-	</div>
-	<div class="tab-pane fade" id="dropdown2">
-	<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-	</div>
-</div>	
+</section>
