@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="span12 new_sub_item">
 		<div class="form-horizontal well">
-			<%= form_for [category, sub_category], :html => {:class => "edit-item"}, :remote => true, :action => sub_category.id.blank? ? "create" : "update"  do |f| %>
+			<%= form_for [category], :html => {:class => "edit-item"}, :remote => true, :action => category.id.blank? ? "create" : "update"  do |f| %>
 				<fieldset>
-					<legend><%= sub_category.id.blank? ? "Nouvelle sous catégorie" : "Modification de la sous catégorie #{sub_category.name}"%></legend>
+					<legend><%= category.id.blank? ? "Nouvelle catégorie" : "Modification de la catégorie #{category.name}"%></legend>
 					<div class="control-group">
 						<label class="control-label" for="input01">Code</label>
 						<div class="controls">
@@ -27,7 +27,7 @@
 					<div class="validation-error"></div>
 					<div class="form-actions">
 						<%= f.submit "Valider", :class => "btn btn-primary", :id => "new-item" %>
-						<%= link_to "Annuler", sub_category.id.blank? ? [category, SubCategory] : [category, sub_category, Deployment], :remote => true, :class => "btn btn-danger", :data => {:typebtn => "cancel"} %>
+						<%= link_to "Annuler", category.id.blank? ? root_path : [category, SubCategory], :remote => true, :class => "btn btn-danger", :data => {:typebtn => "cancel"} %>
 					</div>
 				</fieldset>
 			<% end %>

@@ -27,7 +27,7 @@
 					<div class="validation-error"></div>
 					<div class="form-actions">
 						<%= f.submit "Valider", :class => "btn btn-primary", :id => "new-item" %>
-						<%= link_to "Annuler", [category, sub_category, ], :remote => true, :class => "btn btn-danger", :data => {:typebtn => "cancel"} %>
+						<%= link_to "Annuler", deployment.id.blank? ? [category, sub_category, Deployment] : [category, sub_category, deployment], :remote => true, :class => "btn btn-danger", :data => {:typebtn => "cancel"} %>
 					</div>
 				</fieldset>
 			<% end %>

@@ -16,6 +16,20 @@ respond_to :html, :xml, :json
 		end
 	end
 
+	def index
+		@categories = Category.all
+		@category = Category.find(params[:category_id])
+		respond_with do |format|
+			format.html do
+				if request.xhr?
+					render :partial => "shared/tabs_sub_category", :locals => { :category => @category, :sub_categories => @category.sub_categories, :categories => @categories }, :layout => false, :status => :ok
+				else
+					redirect_to :root
+				end
+			end
+		end
+	end
+	
 
 	def new
 		@category = Category.find(params[:category_id])

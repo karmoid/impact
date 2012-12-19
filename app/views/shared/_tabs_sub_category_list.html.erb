@@ -11,7 +11,10 @@
 			<tbody id="table-select">
 				<% category.sub_categories.each do |sc| %>
 					<tr>
-						<td><%= link_to h(sc.name.blank? ? sc.id : sc.name), [sc.category, sc, Deployment], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %></td>
+						<td>
+							<%= link_to h(sc.name.blank? ? sc.id : sc.name), [sc.category, sc, Deployment], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %>
+							<span class="badge badge-success"><%= sc.deployments.size%></span>
+						</td>
 						<td><%= sc.hr.blank? ? sc.name : sc.hr  %></td>
 						<td><%= sc.note %></td>
 					</tr>	

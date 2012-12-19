@@ -11,7 +11,11 @@
 			<tbody id="table-select">
 				<% sub_category.deployments.each do |d| %>
 					<tr data-linknote="ln-<%= "#{d.id}" %>">
-						<td><%= link_to h(d.name.blank? ? d.id : d.name), [d.sub_category.category, d.sub_category, d], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %><%= flag_helper(d) %></td>
+						<td>
+							<%= link_to h(d.name.blank? ? d.id : d.name), [d.sub_category.category, d.sub_category, d], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %><%= flag_helper(d) %>
+							<span class="badge badge-info"><%= d.hosts.size%></span>
+							<span class="badge badge-warning"><%= d.connections.size%></span>
+						</td>
 						<td><%= d.hr.blank? ? d.name : d.hr  %></td>
 						<td><small><%= d.note %></small></td>
 					</tr>	

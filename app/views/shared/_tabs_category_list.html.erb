@@ -1,0 +1,25 @@
+<div id="item-list" class="row">
+	<div class="span12">
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+				<th>Code</th>
+				<th>Nom</th>
+				<th>Note</th>
+			  </tr>
+			</thead>
+			<tbody id="table-select">
+				<% categories.each do |c| %>
+					<tr>
+						<td>
+							<%= link_to h(c.name.blank? ? c.id : c.name), [c, SubCategory], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %>
+							<span class="badge badge-success"><%= c.sub_categories.size%></span>
+						</td>
+						<td><%= c.hr.blank? ? c.name : c.hr  %></td>
+						<td><%= c.note %></td>
+					</tr>	
+				<% end %>	
+			</tbody>
+		</table>		
+	</div>
+</div>

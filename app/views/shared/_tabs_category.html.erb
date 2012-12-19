@@ -1,9 +1,13 @@
+<div class="row">
+	<ul class="nav nav-pills">
+	<li class="disabled"><a href="#">Accueil</a></li>
+	</ul>
+</div>	
 <header class="jumbotron subhead" id="overview">
   <%= render :partial => "shared/menu_categories" , :locals => {:categories => categories} %>
   <div class="row">
     <div class="span6">
-      <h1><%= category.hr %></h1>
-      <p class="lead"><%= category.note %></p>
+      <h1>Catégories</h1>
     </div>
     <div class="span6">
       <div class="well">
@@ -21,42 +25,16 @@
 				  <span class="icon-bar"></span>
 				  <span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#"><%= category.hr %></a>				
+				<%= link_to "Accueil", root_path, :class => "brand" %>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><%= link_to "Modifier", edit_category_path(category), :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
-						<li class="active"><%= link_to "Nouveau", new_category_sub_category_path(category), :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
-						<li><a href="#">Link</a></li>
-						<li class="dropdown menu-item">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Catégories <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<% categories.each do  |c| %>
-									<li><%= link_to c.hr, c, :tabindex => -1, :data =>{:target => "#main-list"}, :remote => true %></li>
-								<% end %>	
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-							</ul>
-						</li>
+						<li class="active"><%= link_to "Nouveau", new_category_path, :remote => true, :class => "fill-target", :data => {:toggle => "tab", :target => "#myTabContent"} %></li>
 					</ul>
 					<div id="search-results">
 						<%= form_tag listall_path(), :class => "navbar-search pull-left", :remote=>true do %>
-							<%= text_field_tag(:search, @search, :class => "search-query span2", :placeholder => "sous catégories") %>
+							<%= text_field_tag(:search, @search, :class => "search-query span2", :placeholder => "Catégories") %>
 						<% end %>	
 					</div>
-					<ul class="nav pull-right">
-						<li><a href="#">Link</a></li>
-						<li class="divider-vertical"></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-							</ul>
-						</li>
-					</ul>
 				</div><!-- /.nav-collapse -->
 			</div>
 		</div><!-- /navbar-inner -->
@@ -64,6 +42,6 @@
 	<div class="span12" id="results">
 	</div>
 	<div id="myTabContent">
-		<%= render :partial => "shared/tabs_sub_category_list" , :locals => {:category => category} %>
+		<%= render :partial => "shared/tabs_category_list" , :locals => {:categories => categories} %>
 	</div>
 </section>

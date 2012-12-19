@@ -1,3 +1,24 @@
+<div class="row">
+	<ul class="nav nav-pills">
+	<li><%= link_to "Accueil", root_path %></li>
+	<li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= category.hr %> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<% categories.each do |c| %>
+				<li><%= link_to c.hr, [c, SubCategory], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %></li>
+			<% end %>
+		</ul>
+	</li>
+	<li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= sub_category.hr %> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<% category.sub_categories.each do |sc| %>
+				<li><%= link_to sc.hr, [category, sc, Deployment], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %></li>
+			<% end %>
+		</ul>
+	</li>
+	</ul>
+</div>	
 <header class="jumbotron subhead" id="overview">
   <%= render :partial => "shared/menu_categories" , :locals => {:categories => categories} %>
   <div class="row">
@@ -18,7 +39,7 @@
 				  <span class="icon-bar"></span>
 				</a>
 				<span class="load-sub-category">
-					<%= link_to raw('<b class="icon-chevron-left"></b> '+h(sub_category.hr)), sub_category.category, :remote => true, :class => "brand" %></li>
+					<%= link_to raw('<b class="icon-chevron-left"></b> '+h(sub_category.hr)), [sub_category.category, SubCategory], :remote => true, :class => "brand" %></li>
 				</span>	
 				<div class="nav-collapse">
 					<ul class="nav">

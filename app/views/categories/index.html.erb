@@ -27,5 +27,7 @@
 	</div>
 </div>	
 <div class="container">
-	<div id="main-list"></div>
+	<div id="main-list">
+		<%= render :partial => "shared/tabs_category", :locals => { :categories => @categories } %>
+	</div>
 </div>

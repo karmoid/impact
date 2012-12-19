@@ -31,11 +31,12 @@ respond_to :html, :xml, :json
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.find(params[:sub_category_id])
 		@deployment = @sub_category.deployments.find(params[:id])
+		@categories = Category.all
 		@sub_categories = @category.sub_categories
 		respond_with do |format|
 			format.html do
 				if request.xhr?
-					render :partial => "shared/show_deployment", :locals => {:category => @category, :sub_category => @sub_category, :deployment => @deployment, :sub_categories => @sub_categories}, :status => :ok
+					render :partial => "shared/show_deployment", :locals => {:category => @category, :sub_category => @sub_category, :deployment => @deployment, :categories => @categories, :sub_categories => @sub_categories}, :status => :ok
 				end
 			end
 		end
