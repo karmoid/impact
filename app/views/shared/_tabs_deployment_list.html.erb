@@ -13,8 +13,13 @@
 					<tr data-linknote="ln-<%= "#{d.id}" %>">
 						<td>
 							<%= link_to h(d.name.blank? ? d.id : d.name), [d.sub_category.category, d.sub_category, d], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %><%= flag_helper(d) %>
-							<span class="badge badge-info"><%= d.hosts.size%></span>
-							<span class="badge badge-warning"><%= d.connections.size%></span>
+							<% if d.hosts.empty? && d.connections.empty? %>
+								<%= link_to raw('<i class="icon icon-remove-sign"></i>'), [d.sub_category.category, d.sub_category, d], :method => :delete, :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %>
+								<a href="#" class="icon icon-remove-sign"></a>
+							<% else %>	
+								<span class="badge badge-info"><%= d.hosts.size%></span>
+								<span class="badge badge-warning"><%= d.connections.size%></span>
+							<% end %>	
 						</td>
 						<td><%= d.hr.blank? ? d.name : d.hr  %></td>
 						<td><small><%= d.note %></small></td>

@@ -5,11 +5,7 @@
 
 $(".edit-item").live "ajax:success", (event, data, status, xhr) =>
 	console.log("on passe dans 1")
-	if event.target.dataset['typebtn'] == "cancel" 
-		back_to_list(event, data,"main-list")
-	else
-		back_to_list(event, data,"home")
-	show_tab('first')
+	$("#main-list").html(data)
 
 show_tab = (x) ->
 	console.log("on passe dans 2")

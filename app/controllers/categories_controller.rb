@@ -49,28 +49,56 @@ respond_to :html, :xml, :json
 	end
 	
 	def create
-	  @category = Category.new( params[:category] )
+		@category = Category.new( params[:category] )
 
-	  if @category.save
-		respond_with do |format|
-		  format.html do
-			if request.xhr?
-			  render :partial => "categories/show", :locals => { :category => @category }, :layout => false, :status => :created
-			else
-			  redirect_to :root
+		if @category.save
+			respond_with do |format|
+			  format.html do
+				if request.xhr?
+					@categories = Category.all
+					render :partial => "shared/tabs_category", :locals => { :category => @category, :categories => @categories }, :layout => false, :status => :ok
+				else
+					redirect_to :root
+				end
+			  end
 			end
-		  end
-		end
-	  else
-		respond_with do |format|
-		  format.html do
-			if request.xhr?
-			  render :json => @category.errors, :status => :unprocessable_entity
-			else
-			  render :action => :new, :status => :unprocessable_entity
+		else
+			respond_with do |format|
+				format.html do
+					if request.xhr?
+						render :json => @category.errors, :status => :unprocessable_entity
+					else
+						render :action => :new, :status => :unprocessable_entity
+					end
+				end
 			end
-		  end
 		end
-	  end
 	end
+
+	def update
+		@category = Category.find(params[:id])
+		if @category.update_attributes(params[:category])  
+			respond_with do |format|
+				@categories = Category.all
+				format.html do
+					if request.xhr?
+						render :partial => "shared/tabs_sub_category" , :locals => {:category => @category, :categories => @categories} , :status => :created
+					else
+						redirect_to :root
+					end
+				end
+			end
+		else
+			respond_with do |format|
+				format.html do
+					if request.xhr?
+						render :json => @category.errors, :status => :unprocessable_entity
+					else
+						render :action => :new, :status => :unprocessable_entity
+					end
+				end
+			end
+		end
+	end	
+	
 end

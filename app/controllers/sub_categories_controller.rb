@@ -59,11 +59,12 @@ respond_to :html, :xml, :json
 	def create
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.build(params[:sub_category])
+		@categories = Category.all
 		if @sub_category.save
 			respond_with do |format|
 				format.html do
 					if request.xhr?
-						render :partial => "shared/tabs_sub_category_list" , :locals => {:category => @category}, :status => :created
+						render :partial => "shared/tabs_sub_category", :locals => { :category => @category, :sub_categories => @category.sub_categories, :categories => @categories }, :layout => false, :status => :ok
 					else
 						redirect_to :root
 					end
@@ -85,11 +86,13 @@ respond_to :html, :xml, :json
 	def update
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.find(params[:id])
+		@categories = Category.all
 		if @sub_category.update_attributes(params[:sub_category])  
 			respond_with do |format|
 				format.html do
+					@sub_categories = @category.sub_categories
 					if request.xhr?
-						render :partial => "shared/tabs_sub_category_list" , :locals => {:category => @category}, :status => :created
+						render :partial => "shared/tabs_deployments", :locals => {:category => @category, :sub_category => @sub_category, :categories => @categories, :sub_categories => @sub_categories}, :status => :ok
 					else
 						redirect_to :root
 					end
