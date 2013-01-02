@@ -34,6 +34,19 @@ respond_to :html, :xml, :json
 		@deployment = @sub_category.deployments.find(params[:id])
 		@categories = Category.all
 		@sub_categories = @category.sub_categories
+		@tree = Deployment.path_down([@deployment.id])
+		
+		data_table = GoogleVisualr::DataTable.new
+		
+		data_table.new_column('string', 'Name'   )
+		data_table.new_column('string', 'Manager')
+		data_table.new_column('string', 'ToolTip')
+		rows = @deployment.get_xml_tree
+		data_table.add_rows( rows )
+ 
+		opts   = { :allowHtml => true }
+		@chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
+		
 		respond_with do |format|
 			format.html do
 				if request.xhr?

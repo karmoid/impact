@@ -83,6 +83,35 @@ respond_to :html, :xml, :json
 		end
 	end
 
+	def destroy
+		@sub_category = SubCategory.find(params[:id])
+		@category = @sub_category.category
+		@categories = Category.all
+		if @sub_category.destroy 
+			@category.reload
+			respond_with do |format|
+				format.html do
+					if request.xhr?
+						render :partial => "shared/tabs_sub_category", :locals => { :category => @category, :sub_categories => @category.sub_categories, :categories => @categories }, :layout => false, :status => :ok
+					else
+						redirect_to :root
+					end
+				end
+			end
+		else
+			respond_with do |format|
+				format.html do
+					if request.xhr?
+						render :json => @sub_category.errors, :status => :unprocessable_entity
+					else
+						render :action => :new, :status => :unprocessable_entity
+					end
+				end
+			end
+		end
+	end
+	
+	
 	def update
 		@category = Category.find(params[:category_id])
 		@sub_category = @category.sub_categories.find(params[:id])

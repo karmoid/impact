@@ -13,7 +13,11 @@
 					<tr>
 						<td>
 							<%= link_to h(c.name.blank? ? c.id : c.name), [c, SubCategory], :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %>
-							<span class="badge badge-success"><%= c.sub_categories.size%></span>
+							<% if c.sub_categories.empty? %>
+								<%= link_to raw('<i class="icon icon-remove-sign"></i>'), c, :method => :delete, :remote => true, :class => "fill-target", :data => {:target => "#main-list"} %>
+							<% else %>	
+								<span class="badge badge-success"><%= c.sub_categories.size%></span>
+							<% end %>	
 						</td>
 						<td><%= c.hr.blank? ? c.name : c.hr  %></td>
 						<td><%= c.note %></td>
