@@ -31,18 +31,18 @@ class Deployment < ActiveRecord::Base
 	def register_item(item, indices, leaf)
 		if ! indices.empty?
 			current = indices.pop.to_i
-			logger.info "#{indices} restant avec item courant = [#{current}]"
+			# logger.info "#{indices} restant avec item courant = [#{current}]"
 			nextleaf = nil
 			leaf.each do |l|
-				logger.info "verification que current_pop:[#{current}] == l[:node].id [#{l[:node].id}-#{l[:node].hr}]"
+				# logger.info "verification que current_pop:[#{current}] == l[:node].id [#{l[:node].id}-#{l[:node].hr}]"
 				if l[:node].id == current
-					logger.info "[#{current}] trouve, on passe #{indices} a son premier child "
+					# logger.info "[#{current}] trouve, on passe #{indices} a son premier child "
 					nextleaf = l
 				end 
 			end
 			if nextleaf.nil?
-				logger.info "[#{current}] non trouve, on cree un item et on lui passe #{indices}"
-				nextleaf = {:node => item.deployment, :parent => leaf, :child => []}
+				# logger.info "[#{current}] non trouve, on cree un item et on lui passe #{indices}"
+				nextleaf = {:node => item.deployment, :parent => leaf, :child => [], :id => item.host.id, :level => item.level}
 				leaf << nextleaf
 			end
 			register_item(item, indices, nextleaf[:child])
@@ -61,9 +61,19 @@ class Deployment < ActiveRecord::Base
 		key = ""
 		if ! tree.nil?
 			tree.each do |t|
-				key = t[:parent][:node].id.to_s unless t[:parent].nil?
-				logger.info "clef = #{key}"
-				@work << [{:v => t[:node].id.to_s, :f => "#{t[:node].id}-#{t[:node].hr}"}, key, "#{t[:node].name}"]
+				# logger.info t.inspect
+				# logger.info "t[:parent].nil? = #{t[:parent].nil?}"
+				if ! t[:parent].nil?
+					key = t[:level]+"-"+t[:id].to_s
+				end	
+				# logger.info "clef = #{key}"
+				if t[:child].empty?
+					@work << ["#{t[:node].id}-#{t[:node].hr}", key, "#{t[:node].name}"]
+				else
+					@work << [{:v => (t[:level].to_i+1).to_s+"-"+t[:node].id.to_s, 
+					           :f => t[:node].id.to_s+"-"+t[:node].hr}, 
+							   key, "#{t[:node].name}"]
+				end				
 				expand_rows(t[:child])
 			end
 		end	
@@ -71,7 +81,7 @@ class Deployment < ActiveRecord::Base
 	
 	def get_xml_tree
 		Deployment.path_down([id]).each do |row|
-			@tree ||= [{:node => row.host, :parent => nil, :child => []}]
+			@tree ||= [{:node => row.host, :parent => nil, :child => [], :id => nil, :level => "0"}]
 			indices = row.path.split("/").reverse!
 			register_item(row, indices, @tree)
 		end

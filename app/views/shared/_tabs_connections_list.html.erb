@@ -40,31 +40,6 @@
 			</tbody>
 		</table>		
 	</div>	
-	<div class="span12">
-		<table class="table table-striped table-condensed table-hover">
-			<thead>
-			  <tr>
-				<th></th>
-				<th></th>
-				<th>Ancêtre</th>
-				<th></th>
-				<th>Connexions</th>
-			  </tr>
-			</thead>
-			<tbody id="test-tree">
-				<% @tree.each do |dl| %>
-					<tr>
-						<td><%= dl.path %></td>
-						<td><%= dl.host.sub_category.category.hr %>/<%= dl.host.sub_category.hr %></td>
-						<td><%= dl.host.hr %></td>
-						<td><%= dl.deployment.sub_category.category.hr %>/<%= dl.deployment.sub_category.hr %></td>
-						<td><%= dl.deployment.hr %></td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>		
-		<%= deployment.get_xml_tree %>
-		<div id='chart'></div>
-		<%= render_chart(@chart, 'chart') %>
-	</div>	
 </div>
+<div id="chart" class="row"></div>
+<%= render_chart(@chart, "chart") %>

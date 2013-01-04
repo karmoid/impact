@@ -38,9 +38,10 @@ respond_to :html, :xml, :json
 		
 		data_table = GoogleVisualr::DataTable.new
 		
-		data_table.new_column('string', 'Name'   )
-		data_table.new_column('string', 'Manager')
-		data_table.new_column('string', 'ToolTip')
+		data_table.new_column('string', 'Deploiement'   )
+		data_table.new_column('string', 'Host')
+		data_table.new_column('string', 'Description')
+
 		rows = @deployment.get_xml_tree
 		data_table.add_rows( rows )
  

@@ -27,7 +27,7 @@ class DeployLink < ActiveRecord::Base
 				UNION DISTINCT
 				SELECT conx.level+1 as level, conx.path||'/'||deploy_links.deployment_id as path, deploy_links.id, deploy_links.deployment_id FROM deploy_links, conx
 				WHERE conx.host_id = deploy_links.host_id and
-				level <8
+				level <5
 			)
 			SELECT bd.level, bd.path, dl.* FROM deploy_links as dl
 			join conx as bd on (bd.id = dl.id)
